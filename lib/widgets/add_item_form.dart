@@ -22,7 +22,8 @@ class AddItemForm extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              Provider.of<ItemProvider>(context, listen: false).addItem(controller.text);
+              Provider.of<ItemProvider>(context, listen: false)
+                  .addItem(controller.text);
               controller.clear();
             },
           ),

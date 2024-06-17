@@ -15,20 +15,14 @@ class ItemList extends StatelessWidget {
             itemCount: itemProvider.items.length,
             itemBuilder: (context, index) {
               final item = itemProvider.items[index];
-              return Column(
-                children: [
-                  ListTile(
-                    title: Text(item.name),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        _showDeleteConfirmationDialog(context, itemProvider, item);
-                      },
-                    ),
-                  ),
-                  if (index < itemProvider.items.length - 1)
-                    const Divider(),
-                ],
+              return ListTile(
+                title: Text(item.name),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    _showDeleteConfirmationDialog(context, itemProvider, item);
+                  },
+                ),
               );
             },
           ),
@@ -37,13 +31,12 @@ class ItemList extends StatelessWidget {
     );
   }
 
-  void _showDeleteConfirmationDialog(
-      BuildContext context, ItemProvider itemProvider, Item item) {
+  void _showDeleteConfirmationDialog(BuildContext context, ItemProvider itemProvider, Item item) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Delete Item'),
-        content: const Text('Delete this item?'),
+        content: const Text('Are you sure you want to delete this item?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),

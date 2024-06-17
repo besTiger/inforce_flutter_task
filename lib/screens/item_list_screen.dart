@@ -12,8 +12,8 @@ class ItemListScreen extends StatefulWidget {
 }
 
 class ItemListScreenState extends State<ItemListScreen> {
-  final TextEditingController controller = TextEditingController();
-  String sortingCriteria = 'Name';
+  final TextEditingController _controller = TextEditingController();
+  String _sortingCriteria = 'Name';
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +22,15 @@ class ItemListScreenState extends State<ItemListScreen> {
         title: const Text('Items List'),
         actions: [
           DropdownButton<String>(
-            value: sortingCriteria,
+            value: _sortingCriteria,
             onChanged: (String? newValue) {
               setState(() {
-                sortingCriteria = newValue!;
+                _sortingCriteria = newValue!;
                 Provider.of<ItemProvider>(context, listen: false)
-                    .setSortingCriteria(sortingCriteria);
+                    .setSortingCriteria(_sortingCriteria);
               });
             },
-            items: <String>['Name', 'SomeFilter' , 'SomeFilter2']
+            items: <String>['Name', 'SomeFilter']
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
@@ -42,7 +42,7 @@ class ItemListScreenState extends State<ItemListScreen> {
       ),
       body: Column(
         children: [
-          AddItemForm(controller: controller),
+          AddItemForm(controller: _controller),
           Consumer<ItemProvider>(
             builder: (context, itemProvider, child) {
               if (itemProvider.isLoading) {
